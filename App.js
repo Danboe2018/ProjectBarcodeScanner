@@ -5,7 +5,7 @@ import {
   StyleSheet, Alert, TouchableOpacity,
   Image
 } from 'react-native';
-import Camera from 'react-native-camera';
+import Camera from 'react-native-camera'
 export default class barcodeScanner extends Component {
   constructor(props){
     super(props);
@@ -19,11 +19,11 @@ export default class barcodeScanner extends Component {
      <View style ={styles.container}>
        <Camera
        style = {styles.preview}
-       torchMode = {this.state.torchOn ? Camera.constants.torchMode.on:
-      Camera.constants.torchMode.off}
-      onBarCodeRead = {this.onBarCodeRead}
-      ref={cam => this.camera = cam}
-      aspect={Camera.constants.aspect.fill}>
+       torchMode = {this.state.torchOn ? Camera.constants.TorchMode.on :
+       Camera.constants.TorchMode.off}
+        onBarCodeRead = {this.onBarCodeRead}
+        ref={cam => this.camera = cam}
+        aspect={Camera.constants.aspect.fill}>
         <Text style={{
           backgroundColor:'white'
         }}>BARCODE SCANNER</Text>
