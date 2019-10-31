@@ -11,6 +11,7 @@ export default class barcodeScanner extends Component {
   constructor(props) {
     super(props);
     this.barcodeCodes = [];
+    this.barcodeCodes.push(123456)
     this.handTourch = this.handleTourch.bind(this);
     this.state = {
       torchOn: false
@@ -58,12 +59,12 @@ export default class barcodeScanner extends Component {
 
   onBarCodeRead(scanResult) {
     Vibration.vibrate(250);
-    console.warn(scanResult.type);
     console.warn(scanResult.data);
     if (scanResult.data != null) {
-      if (!this.barcodeCodes.includes(scanResult.data)) {
+      if (this.barcodeCodes.includes(scanResult.data)) {
+        Alert.alert("Right Barcode");
         this.barcodeCodes.push(scanResult.data);
-        console.warn('onBarCodeRead call');
+        console.warn('Barcodes :' + this.barcodeCodes);
       }
     }
     return;
