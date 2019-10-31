@@ -25,7 +25,7 @@ pipeline {
                     echo 'Building Android..'
                     sh 'npm install'
                     sh 'react-native run-android --verbose'
-                    sh 'cd android && ./gradlew build'
+                    sh 'cd android ; ./gradlew build'
                 }
             }
         }
