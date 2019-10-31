@@ -57,7 +57,7 @@ export default class barcodeScanner extends Component {
   }
 
   onBarCodeRead(scanResult) {
-    Vibration.vibrate(1000);
+    Vibration.vibrate(250);
     console.warn(scanResult.type);
     console.warn(scanResult.data);
     if (scanResult.data != null) {
