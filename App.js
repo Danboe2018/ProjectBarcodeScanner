@@ -3,16 +3,19 @@ import {
   Text,
   View,
   StyleSheet, Alert, TouchableOpacity,
-  Image
+  Image,
+  Vibration
 } from 'react-native';
 import { RNCamera, FaceDetector } from 'react-native-camera';
 export default class barcodeScanner extends Component {
   constructor(props) {
     super(props);
+    this.barcodeCodes = [];
     this.handTourch = this.handleTourch.bind(this);
     this.state = {
       torchOn: false
     }
+    console.log("Started")
   }
   render() {
     return (
@@ -20,7 +23,8 @@ export default class barcodeScanner extends Component {
         <RNCamera
           style={styles.preview}
           type={RNCamera.Constants.Type.back}
-          flashMode={RNCamera.Constants.FlashMode.on}
+          flashMode={this.state.torchOn ? RNCamera.Constants.FlashMode.on :
+            RNCamera.Constants.FlashMode.off}
           androidCameraPermissionOptions={{
             title: 'Permission to use camera',
             message: 'We need your permission to use your camera',
@@ -33,6 +37,7 @@ export default class barcodeScanner extends Component {
             buttonPositive: 'Ok',
             buttonNegative: 'Cancel',
           }}
+          onBarCodeRead={this.onBarCodeRead.bind(this)}
         >
           <Text style={{
             backgroundColor: 'white'
@@ -51,8 +56,17 @@ export default class barcodeScanner extends Component {
     )
   }
 
-  onBarCodeRead = (e) => {
-    Alert.alert("Barcode value is " + e.data, " Barcode type is " + e.type);
+  onBarCodeRead(scanResult) {
+    Vibration.vibrate(1000);
+    console.warn(scanResult.type);
+    console.warn(scanResult.data);
+    if (scanResult.data != null) {
+      if (!this.barcodeCodes.includes(scanResult.data)) {
+        this.barcodeCodes.push(scanResult.data);
+        console.warn('onBarCodeRead call');
+      }
+    }
+    return;
   }
 
   handleTourch(value) {
