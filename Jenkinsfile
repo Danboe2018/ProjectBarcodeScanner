@@ -3,7 +3,7 @@ pipeline {
         label 'android'
     }
     options {
-        timeout(time: 10, unit: 'MINUTES') 
+        timeout(time: 15, unit: 'MINUTES') 
     }
     stages {
         stage("Clean"){

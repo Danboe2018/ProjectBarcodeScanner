@@ -21,6 +21,7 @@ public class MainActivity extends ReactActivity {
         mReactRootView = new ReactRootView(this);
         mReactInstanceManager = ReactInstanceManager.builder()
                 .setApplication(getApplication())
+                .setCurrentActivity(this)
                 .setBundleAssetName("index.android.bundle")  // this is dependant on how you name you JS files, example assumes index.android.js
                 .setJSMainModulePath("index.android")        // this is dependant on how you name you JS files, example assumes index.android.js
                 .addPackage(new MainReactPackage())
@@ -28,7 +29,7 @@ public class MainActivity extends ReactActivity {
                 .setUseDeveloperSupport(BuildConfig.DEBUG)
                 .setInitialLifecycleState(LifecycleState.RESUMED)
                 .build();
-        mReactRootView.startReactApplication(mReactInstanceManager, "AwesomeProject", null); //change "AwesomeProject" to name of your app 
+        mReactRootView.startReactApplication(mReactInstanceManager," ProjectBarcodeScanner", null); //change "AwesomeProject" to name of your app 
         setContentView(mReactRootView);
     }
 
