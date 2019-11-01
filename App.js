@@ -1,20 +1,9 @@
 import React, { Component } from 'react';
-import { Text, View, StyleSheet, Alert, TouchableOpacity, Image, Vibration } from 'react-native';
+import { Text, View, StyleSheet, Alert, TouchableOpacity, Image, Vibration, Button } from 'react-native';
 import { RNCamera } from 'react-native-camera';
 import { createStackNavigator } from 'react-navigation-stack';
-import ProfileScreen from "./App";
+import ProfileScreen from "./ProfileScreen";
 import { createAppContainer } from 'react-navigation';
-
-const MainNavigator = createStackNavigator(
-  {
-    Home: BarcodeScanner,
-    Profile: ProfileScreen,
-  },
-  {
-    initialRouteName: 'Home',
-  }
-);
-
 
 class BarcodeScanner extends Component {
 
@@ -49,9 +38,11 @@ class BarcodeScanner extends Component {
           }}
           onBarCodeRead={this.onBarCodeRead.bind(this)}
         >
-          <Text style={{
-            backgroundColor: 'white'
-          }}>BARCODE SCANNER</Text>
+          <Text style={{backgroundColor: 'white'}}>BARCODE SCANNER</Text>
+          <Button
+              title="Go to Profile"
+              onPress={() => this.props.navigation.navigate('Profile')}
+            />
         </RNCamera>
         <View style={styles.bottomOverlay}>
           <TouchableOpacity onPress={() =>
@@ -60,10 +51,7 @@ class BarcodeScanner extends Component {
               source={this.state.torchOn === true ?
                 require('./images/flasher_on.png') :
                 require('./images/flasher_off.png')} />
-            <Button
-              title="Go to Profile"
-              onPress={() => this.props.navigation.navigate('Profile')}
-            />
+            
           </TouchableOpacity>
         </View>
       </View>
@@ -114,6 +102,16 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between'
   },
 });
+
+const MainNavigator = createStackNavigator(
+  {
+    Home: BarcodeScanner,
+    Profile: ProfileScreen
+  },
+  {
+    initialRouteName: 'Home',
+  }
+);
 
 const AppContainer = createAppContainer(MainNavigator);
 
