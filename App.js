@@ -1,13 +1,23 @@
 import React, { Component } from 'react';
-import {
-  Text,
-  View,
-  StyleSheet, Alert, TouchableOpacity,
-  Image,
-  Vibration
-} from 'react-native';
-import { RNCamera, FaceDetector } from 'react-native-camera';
-export default class barcodeScanner extends Component {
+import { Text, View, StyleSheet, Alert, TouchableOpacity, Image, Vibration } from 'react-native';
+import { RNCamera } from 'react-native-camera';
+import { createStackNavigator } from 'react-navigation-stack';
+import ProfileScreen from "./App";
+import { createAppContainer } from 'react-navigation';
+
+const MainNavigator = createStackNavigator(
+  {
+    Home: BarcodeScanner,
+    Profile: ProfileScreen,
+  },
+  {
+    initialRouteName: 'Home',
+  }
+);
+
+
+class BarcodeScanner extends Component {
+
   constructor(props) {
     super(props);
     this.barcodeCodes = [];
@@ -50,6 +60,10 @@ export default class barcodeScanner extends Component {
               source={this.state.torchOn === true ?
                 require('./images/flasher_on.png') :
                 require('./images/flasher_off.png')} />
+            <Button
+              title="Go to Profile"
+              onPress={() => this.props.navigation.navigate('Profile')}
+            />
           </TouchableOpacity>
         </View>
       </View>
@@ -58,12 +72,12 @@ export default class barcodeScanner extends Component {
 
   onBarCodeRead(scanResult) {
     Vibration.vibrate(250);
-    console.warn(scanResult.type);
     console.warn(scanResult.data);
     if (scanResult.data != null) {
       if (!this.barcodeCodes.includes(scanResult.data)) {
+        Alert.alert("Right Barcode");
         this.barcodeCodes.push(scanResult.data);
-        console.warn('onBarCodeRead call');
+        console.warn('Barcodes :' + this.barcodeCodes);
       }
     }
     return;
@@ -82,7 +96,6 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row'
   },
-
   preview: {
     flex: 1,
     justifyContent: 'flex-end',
@@ -93,7 +106,6 @@ const styles = StyleSheet.create({
     height: 40,
     width: 40
   },
-
   bottomOverlay: {
     position: "absolute",
     width: "100%",
@@ -102,3 +114,11 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between'
   },
 });
+
+const AppContainer = createAppContainer(MainNavigator);
+
+export default class App extends Component {
+  render() {
+    return <AppContainer />;
+  }
+}
