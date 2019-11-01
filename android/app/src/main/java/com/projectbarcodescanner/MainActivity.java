@@ -1,6 +1,14 @@
 package com.projectbarcodescanner;
 
+import android.os.Bundle;
+
 import com.facebook.react.ReactActivity;
+import com.facebook.react.ReactInstanceManager;
+import com.facebook.react.ReactRootView;
+import com.facebook.react.common.LifecycleState;
+import com.facebook.react.shell.MainReactPackage;
+
+import org.pgsqlite.SQLitePluginPackage;
 
 public class MainActivity extends ReactActivity {
 
@@ -13,10 +21,10 @@ public class MainActivity extends ReactActivity {
         mReactRootView = new ReactRootView(this);
         mReactInstanceManager = ReactInstanceManager.builder()
                 .setApplication(getApplication())
-                .setBundleAssetName("index.android.bundle")  // this is dependant on how you name you JS files, example assumes index.android.js 
-                .setJSMainModuleName("index.android")        // this is dependant on how you name you JS files, example assumes index.android.js 
+                .setBundleAssetName("index.android.bundle")  // this is dependant on how you name you JS files, example assumes index.android.js
+                .setJSMainModulePath("index.android")        // this is dependant on how you name you JS files, example assumes index.android.js
                 .addPackage(new MainReactPackage())
-                .addPackage(new SQLitePluginPackage())       // register SQLite Plugin here 
+                .addPackage(new SQLitePluginPackage())       // register SQLite Plugin here
                 .setUseDeveloperSupport(BuildConfig.DEBUG)
                 .setInitialLifecycleState(LifecycleState.RESUMED)
                 .build();
