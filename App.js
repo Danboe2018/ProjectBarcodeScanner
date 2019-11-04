@@ -1,11 +1,8 @@
 import React, { Component } from 'react';
 import { Text, View, StyleSheet, Alert, TouchableOpacity, Image, Vibration, Button } from 'react-native';
 import { RNCamera } from 'react-native-camera';
-import { createStackNavigator } from 'react-navigation-stack';
-import ProfileScreen from "./ProfileScreen";
-import { createAppContainer } from 'react-navigation';
 
-class BarcodeScanner extends Component {
+export default class BarcodeScanner extends Component {
 
   constructor(props) {
     super(props);
@@ -102,21 +99,3 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between'
   },
 });
-
-const MainNavigator = createStackNavigator(
-  {
-    Home: BarcodeScanner,
-    Profile: ProfileScreen
-  },
-  {
-    initialRouteName: 'Home',
-  }
-);
-
-const AppContainer = createAppContainer(MainNavigator);
-
-export default class App extends Component {
-  render() {
-    return <AppContainer />;
-  }
-}
