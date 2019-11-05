@@ -9,6 +9,7 @@ pipeline {
         stage("Clean"){
             steps {
                 echo 'Cleaning...'
+                sh 'git reset --hard HEAD'
                 sh 'cd android ; ./gradlew clean'
                 sh 'rm -rf node_modules'
                 sh 'yarn cache clean'
