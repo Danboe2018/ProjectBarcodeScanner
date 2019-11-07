@@ -1,8 +1,8 @@
 platform :ios, '9.0'
 require_relative '../node_modules/@react-native-community/cli-platform-ios/native_modules'
 
-target 'ProjectBarcodeScanner' do
-  # Pods for ProjectBarcodeScanner
+target 'MyProjectName' do
+  # Pods for MyProjectName
   pod 'FBLazyVector', :path => "../node_modules/react-native/Libraries/FBLazyVector"
   pod 'FBReactNativeSpec', :path => "../node_modules/react-native/Libraries/FBReactNativeSpec"
   pod 'RCTRequired', :path => "../node_modules/react-native/Libraries/RCTRequired"
@@ -34,9 +34,7 @@ target 'ProjectBarcodeScanner' do
   pod 'glog', :podspec => '../node_modules/react-native/third-party-podspecs/glog.podspec'
   pod 'Folly', :podspec => '../node_modules/react-native/third-party-podspecs/Folly.podspec'
 
-  pod 'react-native-camera', :path => '../node_modules/react-native-camera'
-
-  target 'ProjectBarcodeScannerTests' do
+  target 'MyProjectNameTests' do
     inherit! :search_paths
     # Pods for testing
   end
@@ -44,10 +42,10 @@ target 'ProjectBarcodeScanner' do
   use_native_modules!
 end
 
-target 'ProjectBarcodeScanner-tvOS' do
-  # Pods for ProjectBarcodeScanner-tvOS
+target 'MyProjectName-tvOS' do
+  # Pods for MyProjectName-tvOS
 
-  target 'ProjectBarcodeScanner-tvOSTests' do
+  target 'MyProjectName-tvOSTests' do
     inherit! :search_paths
     # Pods for testing
   end

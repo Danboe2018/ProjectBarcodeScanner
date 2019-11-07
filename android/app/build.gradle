@@ -128,7 +128,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.projectbarcodescanner"
+        applicationId "com.myprojectname"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
@@ -180,10 +180,8 @@ android {
 }
 
 dependencies {
-    implementation project(':react-native-camera')
     implementation fileTree(dir: "libs", include: ["*.jar"])
-    implementation ("com.facebook.react:react-native:0.61.3") { force = true }  // From node_modules
-    implementation project(':react-native-sqlite-storage')
+    implementation "com.facebook.react:react-native:+"  // From node_modules
 
     if (enableHermes) {
         def hermesPath = "../../node_modules/hermes-engine/android/";
