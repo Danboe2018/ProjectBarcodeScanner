@@ -1,5 +1,5 @@
 {
-  "name": "ProjectBarcodeScanner",
+  "name": "MyProjectName",
   "version": "0.0.1",
   "private": true,
   "scripts": {
@@ -11,24 +11,26 @@
   },
   "dependencies": {
     "react": "16.9.0",
-    "react-native": "0.61.3",
-    "react-native-camera": "^3.8.0",
+    "react-native": "0.61.4",
+    "react-native-camera": "^3.9.0",
     "react-native-gesture-handler": "^1.5.0",
-    "react-native-sqlite-storage": "^4.1.0",
     "react-navigation": "^4.0.10",
     "react-navigation-stack": "^1.10.3"
   },
   "devDependencies": {
-    "@babel/core": "^7.6.4",
-    "@babel/runtime": "^7.6.3",
+    "@babel/core": "^7.7.0",
+    "@babel/runtime": "^7.7.1",
     "@react-native-community/eslint-config": "^0.0.5",
     "babel-jest": "^24.9.0",
     "eslint": "^6.6.0",
     "jest": "^24.9.0",
-    "metro-react-native-babel-preset": "^0.56.3",
+    "metro-react-native-babel-preset": "^0.57.0",
     "react-test-renderer": "16.9.0"
   },
   "jest": {
     "preset": "react-native"
+  },
+  "resolutions": {
+    "metro-config": "0.57.0"
   }
 }

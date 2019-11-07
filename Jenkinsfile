@@ -10,32 +10,31 @@ pipeline {
             steps {
                 echo 'Cleaning...'
                 sh 'git reset --hard HEAD'
+                sh 'yarn install'
                 sh 'cd android ; ./gradlew clean'
-                sh 'rm -rf node_modules'
-                sh 'yarn cache clean'
             }
         }
-        stage("Project Install") {
+        stage("Run Android") {
             steps {
-                sh 'yarn install'
+                wrap([$class: 'AnsiColorBuildWrapper', 'colorMapName': 'XTerm']) {
+                    echo 'Running Android..'
+                    sh 'react-native run-android --verbose'
+                }
             }
         }
         stage('Build Android') {
             steps {
-                wrap([$class: 'AnsiColorBuildWrapper', 'colorMapName': 'XTerm']) {
+                 wrap([$class: 'AnsiColorBuildWrapper', 'colorMapName': 'XTerm']) {
                     echo 'Building Android..'
-                    sh 'npm install'
-                    sh 'react-native run-android --verbose'
-                    sh 'rm -rf node_modules && npm install'
+                    sh 'cd android ; ./gradlew clean'
                     sh 'cd android ; ./gradlew build'
                 }
             }
         }
-        stage('Build iOS') {
+        stage('Run iOS') {
             steps {
                 wrap([$class: 'AnsiColorBuildWrapper', 'colorMapName': 'XTerm']) {
-                    echo 'Building iOS..'
-                    sh 'npm install'
+                    echo 'Running iOS..'
                     sh 'cd ios ; pod install'
                     sh 'react-native run-ios --verbose'
                 }
