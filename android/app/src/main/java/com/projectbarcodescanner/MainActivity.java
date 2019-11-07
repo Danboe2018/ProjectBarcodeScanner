@@ -1,14 +1,6 @@
 package com.projectbarcodescanner;
 
-import android.os.Bundle;
-
 import com.facebook.react.ReactActivity;
-import com.facebook.react.ReactInstanceManager;
-import com.facebook.react.ReactRootView;
-import com.facebook.react.common.LifecycleState;
-import com.facebook.react.shell.MainReactPackage;
-
-import org.pgsqlite.SQLitePluginPackage;
 
 public class MainActivity extends ReactActivity {
 
@@ -18,6 +10,6 @@ public class MainActivity extends ReactActivity {
    */
   @Override
   protected String getMainComponentName() {
-    return "ProjectBarcodeScanner";
+    return "MyProjectName";
   }
 }
