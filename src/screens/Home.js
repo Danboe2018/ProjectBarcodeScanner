@@ -11,8 +11,8 @@ class Home extends React.Component {
                 alignItems: 'center',
                 justifyContent: 'center'
             }}>
-                <Button title="Go to Add to List screen"
-                    onPress={() => this.props.navigation.navigate('AddToList')}
+                <Button title="Go to Profile screen"
+                    onPress={() => this.props.navigation.navigate('Profile')}
                 />
                 <Button title="Go to Camera screen"
                     onPress={() => this.props.navigation.navigate('Camera')}
