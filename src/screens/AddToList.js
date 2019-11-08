@@ -1,8 +1,8 @@
 import React from 'react';
 import { Button, View, Text } from 'react-native';
-class Profile extends React.Component {
+class AddToList extends React.Component {
     static navigationOptions = {
-        title: 'Profile'
+        title: 'AddToList'
     };
     render() {
         return (
@@ -11,11 +11,10 @@ class Profile extends React.Component {
                 alignItems: 'center',
                 justifyContent: 'center'
             }}>
-                <Button title="Go to Home screen"
-                    onPress={() => this.props.navigation.navigate('Home')}
-                />
+            <Text>Text For Screen</Text>
+            <Button>Add To List</Button>
             </View>
         );
     }
 }
-export default Profile;
+export default AddToList;
