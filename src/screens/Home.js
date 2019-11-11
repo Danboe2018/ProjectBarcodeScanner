@@ -14,9 +14,15 @@ class Home extends React.Component {
                 <Button title="Go to Add To List screen"
                     onPress={() => this.props.navigation.navigate('AddToList')}
                 />
-                <Button title="Go to Camera screen"
-                    onPress={() => this.props.navigation.navigate('Camera')}
-                />
+                <View style={{
+                    flex: 1,
+                    alignItems: 'center',
+                    justifyContent: 'flex-end'
+                }}>
+                    <Button title="Go to Camera screen"
+                        onPress={() => this.props.navigation.navigate('Camera')}
+                    />
+                </View>
             </View>
         );
     }
