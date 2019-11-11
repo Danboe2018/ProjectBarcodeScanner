@@ -38,10 +38,6 @@ class Camera extends React.Component {
                     onBarCodeRead={this.onBarCodeRead.bind(this)}
                 >
                     <Text style={{ backgroundColor: 'white' }}>BARCODE SCANNER</Text>
-                    <Button
-                        title="Go to Home"
-                        onPress={() => this.props.navigation.navigate('Home')}
-                    />
                 </RNCamera>
                 <View style={styles.bottomOverlay}>
                     <TouchableOpacity onPress={() =>
