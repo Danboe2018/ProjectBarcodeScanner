@@ -5,8 +5,7 @@ import AsyncStorage from '@react-native-community/async-storage';
 class AddToList extends React.Component {
     constructor(props) {
         super(props);
-        barCodes = [{ Product: "Enquire Shampoo", Code: "1234567" }, { Product: "Hemp Shampoo", Code: "2345678" }];
-
+        this.getAllKeys();
     }
 
     componentDidMount() {
@@ -54,20 +53,18 @@ class AddToList extends React.Component {
     }
 
     AddToArray = () => {
-        barCodes.push({ Product: this.state.productName, Code: this.state.productCode })
-        this.forceUpdate();
+        //     barCodes.push({ Product: this.state.productName, Code: this.state.productCode })
         this.storeData();
     }
 
     storeData = async () => {
-        var prodName = this.state.productName
-        var prodCode = this.state.productCode
         try {
             await AsyncStorage.setItem(this.state.productName, this.state.productCode)
         } catch (error) {
             console.log('Store error:' + error)
             // Error saving data
         }
+        this.getAllKeys();
     };
 
     retrieveData = async () => {
@@ -84,6 +81,7 @@ class AddToList extends React.Component {
     };
 
     getAllKeys = async () => {
+        barCodes.length = 0;
         try {
             AsyncStorage.getAllKeys((err, keys) => {
                 AsyncStorage.multiGet(keys, (err, stores) => {
@@ -94,6 +92,9 @@ class AddToList extends React.Component {
 
                         console.log(key)
                         console.log(value)
+
+                        barCodes.push({Product: key, Code: value})
+                        this.forceUpdate();
                     });
                 });
             });
