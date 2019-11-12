@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, TextInput, Button, Alert } from 'react-native';
+import { View, Text, TextInput, Button } from 'react-native';
 class AddToList extends React.Component {
     constructor(props) {
         super(props);
@@ -10,6 +10,7 @@ class AddToList extends React.Component {
         title: 'AddToList'
     };
     render() {
+        const { navigation } = this.props;
         return (
             <View style={{
                 flex: 1,
@@ -18,12 +19,15 @@ class AddToList extends React.Component {
             }}>
                 <Text>Add to List:</Text>
                 <TextInput
+                    style={{ height: 40, width: "95%", borderColor: 'gray', borderWidth: 1, marginBottom: 20 }}
                     placeholder="Product Name:"
                     onChangeText={(text) => this.setState({ productName: text })}
                 />
 
                 <TextInput
+                    style={{ height: 40, width: "95%", borderColor: 'gray', borderWidth: 1, marginBottom: 20 }}
                     placeholder="Product Code:"
+                    value={JSON.stringify(navigation.getParam('productCode', "11"))}
                     onChangeText={(text) => this.setState({ productCode: text })}
                 />
 

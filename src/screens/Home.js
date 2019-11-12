@@ -12,7 +12,7 @@ class Home extends React.Component {
                 justifyContent: 'center'
             }}>
                 <Button title="Go to Add To List screen"
-                    onPress={() => this.props.navigation.navigate('AddToList')}
+                    onPress={() => this.props.navigation.navigate('AddToList', {productCode: 123456})}
                 />
                 <View style={{
                     flex: 1,
