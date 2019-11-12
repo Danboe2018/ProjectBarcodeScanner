@@ -1,15 +1,15 @@
 import React from 'react';
 import { View, Text, TextInput, Button } from 'react-native';
-import { AsyncStorage } from '@react-native-community/async-storage';
+import AsyncStorage from '@react-native-community/async-storage';
 
 class AddToList extends React.Component {
     constructor(props) {
         super(props);
         barCodes = [{ Product: "Enquire Shampoo", Code: "1234567" }, { Product: "Hemp Shampoo", Code: "2345678" }];
-        
+
     }
 
-    componentDidMount(){
+    componentDidMount() {
         const { navigation } = this.props;
         this.setState({ productCode: JSON.stringify(navigation.getParam('productCode', "11")) })
     }
@@ -47,6 +47,7 @@ class AddToList extends React.Component {
                     justifyContent: 'flex-end'
                 }}>
                     <Button title="Add To List" onPress={this.AddToArray} />
+                    <Button title="Load All Keys" onPress={this.getAllKeys} />
                 </View>
             </View>
         );
@@ -55,28 +56,50 @@ class AddToList extends React.Component {
     AddToArray = () => {
         barCodes.push({ Product: this.state.productName, Code: this.state.productCode })
         this.forceUpdate();
-        this._storeData();
-        this._retrieveData();
+        this.storeData();
     }
 
-    _storeData = async () => {
+    storeData = async () => {
+        var prodName = this.state.productName
+        var prodCode = this.state.productCode
         try {
-            await AsyncStorage.setItem('TASKS', 'I like to save it.');
+            await AsyncStorage.setItem(this.state.productName, this.state.productCode)
         } catch (error) {
+            console.log('Store error:' + error)
             // Error saving data
         }
     };
 
-    _retrieveData = async () => {
+    retrieveData = async () => {
         try {
-            const value = await AsyncStorage.getItem('TASKS');
+            const value = await AsyncStorage.getItem('TASKS')
             if (value !== null) {
                 // We have data!!
                 console.log(value);
             }
         } catch (error) {
             // Error retrieving data
+            console.log('retrieve error:' + error)
         }
     };
+
+    getAllKeys = async () => {
+        try {
+            AsyncStorage.getAllKeys((err, keys) => {
+                AsyncStorage.multiGet(keys, (err, stores) => {
+                    stores.map((result, i, store) => {
+                        // get at each store's key/value so you can work with it
+                        let key = store[i][0];
+                        let value = store[i][1];
+
+                        console.log(key)
+                        console.log(value)
+                    });
+                });
+            });
+        } catch (e) {
+            console.log('Get all error:' + e)
+        }
+    }
 }
 export default AddToList;
