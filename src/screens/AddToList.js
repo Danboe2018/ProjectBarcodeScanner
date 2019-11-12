@@ -5,6 +5,7 @@ import AsyncStorage from '@react-native-community/async-storage';
 class AddToList extends React.Component {
     constructor(props) {
         super(props);
+        barCodes = [];
         this.getAllKeys();
     }
 
