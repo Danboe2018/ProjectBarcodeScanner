@@ -55,15 +55,18 @@ class Camera extends React.Component {
 
     onBarCodeRead(scanResult) {
         Vibration.vibrate(250);
+        this.props.navigation.navigate('AddToList', { productCode: parseInt(scanResult.data) })
+        return;
+    }
+
+    debugBarcode() {
         console.warn(scanResult.data);
         if (scanResult.data != null) {
             if (!this.barcodeCodes.includes(scanResult.data)) {
-                Alert.alert("Right Barcode");
                 this.barcodeCodes.push(scanResult.data);
                 console.warn('Barcodes :' + this.barcodeCodes);
             }
         }
-        return;
     }
 
     handleTourch(value) {

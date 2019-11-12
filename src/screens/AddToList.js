@@ -6,6 +6,12 @@ class AddToList extends React.Component {
     constructor(props) {
         super(props);
         barCodes = [{ Product: "Enquire Shampoo", Code: "1234567" }, { Product: "Hemp Shampoo", Code: "2345678" }];
+        
+    }
+
+    componentDidMount(){
+        const { navigation } = this.props;
+        this.setState({ productCode: JSON.stringify(navigation.getParam('productCode', "11")) })
     }
 
     static navigationOptions = {
@@ -30,7 +36,7 @@ class AddToList extends React.Component {
                 <Text>Product Code:</Text>
                 <TextInput
                     style={{ height: 40, width: "95%", borderColor: 'black', borderWidth: 1, marginBottom: 20 }}
-                    value={JSON.stringify(navigation.getParam('productCode', "11"))}
+                    defaultValue={JSON.stringify(navigation.getParam('productCode', "11"))}
                     onChangeText={(text) => this.setState({ productCode: text })}
                 />
 
