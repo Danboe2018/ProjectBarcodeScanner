@@ -28,6 +28,7 @@ pipeline {
                     echo 'Building Android..'
                     sh 'cd android ; ./gradlew clean'
                     sh 'cd android ; ./gradlew build'
+                    sh 'cd android\app\build\outputs\apk\release\ ; adb install -r app-release.apk'
                 }
             }
         }
