@@ -10,10 +10,17 @@ class Camera extends React.Component {
         this.barcodeCodes = [];
         this.handTourch = this.handleTourch.bind(this);
         this.state = {
-            torchOn: false
+            torchOn: false,
+            cameraMode: ''
         }
         console.log("Started")
     }
+
+    componentDidMount() {
+        const { navigation } = this.props;
+        this.setState({ cameraMode: JSON.stringify(navigation.getParam('cameraMode', '11')) });
+    }
+
     render() {
         return (
             <View style={styles.container}>
@@ -55,7 +62,9 @@ class Camera extends React.Component {
 
     onBarCodeRead(scanResult) {
         Vibration.vibrate(250);
-        this.props.navigation.navigate('AddToList', { productCode: parseInt(scanResult.data) })
+        if (this.state.cameraMode.includes("Add")) {
+            this.props.navigation.navigate('AddToList', { productCode: parseInt(scanResult.data) })
+        }
         return;
     }
 

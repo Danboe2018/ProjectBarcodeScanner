@@ -12,17 +12,12 @@ class Home extends React.Component {
                 justifyContent: 'center'
             }}>
                 <Button title="Go to Add To List screen"
-                    onPress={() => this.props.navigation.navigate('AddToList', {productCode: 123456})}
+                    onPress={() => this.props.navigation.navigate('Camera', { cameraMode: "Add" })}
                 />
-                <View style={{
-                    flex: 1,
-                    alignItems: 'center',
-                    justifyContent: 'flex-end'
-                }}>
-                    <Button title="Go to Camera screen"
-                        onPress={() => this.props.navigation.navigate('Camera')}
-                    />
-                </View>
+
+                <Button title="Go to Scan from List screen"
+                    onPress={() => this.props.navigation.navigate('Camera', { cameraMode: "Scan" })}
+                />
             </View>
         );
     }
