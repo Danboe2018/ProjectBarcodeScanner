@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View, StyleSheet, Alert, TouchableOpacity, Image, Vibration, Button } from 'react-native';
+import { Text, View, StyleSheet, TouchableOpacity, Image, Vibration } from 'react-native';
 import { RNCamera } from 'react-native-camera';
 class Camera extends React.Component {
     static navigationOptions = {
@@ -11,7 +11,8 @@ class Camera extends React.Component {
         this.handTourch = this.handleTourch.bind(this);
         this.state = {
             torchOn: false,
-            cameraMode: ''
+            cameraMode: '',
+            titleText: ''
         }
         console.log("Started")
     }
@@ -44,7 +45,14 @@ class Camera extends React.Component {
                     }}
                     onBarCodeRead={this.onBarCodeRead.bind(this)}
                 >
-                    <Text style={{ backgroundColor: 'white' }}>BARCODE SCANNER</Text>
+                    <Text style={{
+                        fontSize: 24,
+                        color: 'white',
+                        textShadowColor: 'black',
+                        textShadowRadius: 5,
+                        textShadowOffset: {width: 2, height: 2},
+                        margin: 50
+                    }}>{this.getTitleText()}</Text>
                 </RNCamera>
                 <View style={styles.bottomOverlay}>
                     <TouchableOpacity onPress={() =>
@@ -58,6 +66,14 @@ class Camera extends React.Component {
                 </View>
             </View>
         )
+    }
+
+    getTitleText() {
+        if (this.state.cameraMode.includes("Add")) {
+            return 'Scan Barcode To Add'
+        } else {
+            return "Scan Barcode To Check"
+        }
     }
 
     onBarCodeRead(scanResult) {
