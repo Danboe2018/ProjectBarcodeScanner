@@ -47,7 +47,6 @@ class AddToList extends React.Component {
                     justifyContent: 'flex-end'
                 }}>
                     <Button title="Add To List" onPress={this.AddToArray} />
-                    <Button title="Load All Keys" onPress={this.getAllKeys} />
                 </View>
             </View>
         );
