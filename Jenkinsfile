@@ -10,6 +10,7 @@ pipeline {
             steps {
                 echo 'Cleaning...'
                 sh 'git reset --hard HEAD'
+                sh 'rm -rf node_modules'
                 sh 'yarn install'
                 sh 'cd android ; ./gradlew clean'
             }
