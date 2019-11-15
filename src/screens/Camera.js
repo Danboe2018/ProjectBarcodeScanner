@@ -1,20 +1,22 @@
 import React from 'react';
 import { Text, View, StyleSheet, TouchableOpacity, Image, Vibration } from 'react-native';
 import { RNCamera } from 'react-native-camera';
+import AsyncStorage from '@react-native-community/async-storage';
+
 class Camera extends React.Component {
     static navigationOptions = {
         title: 'Camera'
     };
     constructor(props) {
         super(props);
-        this.barcodeCodes = [];
-        this.handTourch = this.handleTourch.bind(this);
+        this.barCodes = [];
         this.state = {
             torchOn: false,
             cameraMode: '',
             titleText: ''
         }
         console.log("Started")
+        this.getAllKeys();
     }
 
     componentDidMount() {
@@ -29,8 +31,6 @@ class Camera extends React.Component {
                     style={styles.preview}
                     type={RNCamera.Constants.Type.back}
                     captureAudio={false}
-                    flashMode={this.state.torchOn ? RNCamera.Constants.FlashMode.on :
-                        RNCamera.Constants.FlashMode.off}
                     androidCameraPermissionOptions={{
                         title: 'Permission to use camera',
                         message: 'We need your permission to use your camera',
@@ -43,27 +43,18 @@ class Camera extends React.Component {
                         buttonPositive: 'Ok',
                         buttonNegative: 'Cancel',
                     }}
-                    onBarCodeRead={this.onBarCodeRead.bind(this)}
-                >
+                    onBarCodeRead={this.onBarCodeRead.bind(this)}>
+                    {this.barCodes.map((type) => <Text>{type.Product} {type.Code}</Text>)}
                     <Text style={{
                         fontSize: 24,
                         color: 'white',
                         textShadowColor: 'black',
                         textShadowRadius: 5,
-                        textShadowOffset: {width: 2, height: 2},
+                        textShadowOffset: { width: 2, height: 2 },
                         margin: 50
                     }}>{this.getTitleText()}</Text>
+                    
                 </RNCamera>
-                <View style={styles.bottomOverlay}>
-                    <TouchableOpacity onPress={() =>
-                        this.handleTourch(this.state.torchOn)}>
-                        <Image style={styles.cameraIcon}
-                            source={this.state.torchOn === true ?
-                                require('../../images/flasher_on.png') :
-                                require('../../images/flasher_off.png')} />
-
-                    </TouchableOpacity>
-                </View>
             </View>
         )
     }
@@ -77,9 +68,22 @@ class Camera extends React.Component {
     }
 
     onBarCodeRead(scanResult) {
+        let index = 0;
         Vibration.vibrate(250);
         if (this.state.cameraMode.includes("Add")) {
             this.props.navigation.navigate('AddToList', { productCode: parseInt(scanResult.data) })
+        } else {
+            index = this.matchBarcode(scanResult.data)
+            if (index != -1) {
+                console.log("Index: " + index)
+                AsyncStorage.removeItem(this.barCodes[index].Product)
+                this.barCodes.splice(index,1)
+                alert("Item Removed From List.")
+                this.getAllKeys();
+            } else {
+                alert("Item Not Found On List.")
+                console.log("DATA: " + scanResult.data)
+            }
         }
         return;
     }
@@ -87,19 +91,42 @@ class Camera extends React.Component {
     debugBarcode() {
         console.warn(scanResult.data);
         if (scanResult.data != null) {
-            if (!this.barcodeCodes.includes(scanResult.data)) {
-                this.barcodeCodes.push(scanResult.data);
-                console.warn('Barcodes :' + this.barcodeCodes);
+            if (!this.barCodes.includes(scanResult.data)) {
+                this.barCodes.push(scanResult.data);
+                console.warn('Barcodes :' + this.barCodes);
             }
         }
     }
 
-    handleTourch(value) {
-        if (value === true) {
-            this.setState({ torchOn: false });
-        } else {
-            this.setState({ torchOn: true });
+    matchBarcode = (testCode) => {
+        for(let barcode of this.barCodes){
+            if(barcode.Code == testCode){
+                return (this.barCodes.indexOf(barcode));
+            }
+        } 
+        return (-1);
+    }
+
+    getAllKeys = async () => {
+        this.barCodes = []
+        try {
+            AsyncStorage.getAllKeys((err, keys) => {
+                AsyncStorage.multiGet(keys, (err, stores) => {
+                    stores.map((result, i, store) => {
+                        // get at each store's key/value so you can work with it
+                        let key = store[i][0];
+                        let value = store[i][1];
+
+                        this.barCodes.push({ Product: key, Code: parseInt(value) })
+                        this.forceUpdate();
+                        console.log(this.barCodes)
+                    });
+                });
+            });
+        } catch (e) {
+            console.log('Get all error:' + e)
         }
+        console.log("Logged all keys.")
     }
 }
 

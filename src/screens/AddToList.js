@@ -40,21 +40,15 @@ class AddToList extends React.Component {
                     onChangeText={(text) => this.setState({ productCode: text })}
                 />
 
-                {barCodes.map((type) => <Text>{type.Product} {type.Code}</Text>)}
                 <View style={{
                     flex: 1,
                     alignSelf: 'center',
                     justifyContent: 'flex-end'
                 }}>
-                    <Button title="Add To List" onPress={this.AddToArray} />
+                    <Button title="Add To List" onPress={this.storeData()} />
                 </View>
             </View>
         );
-    }
-
-    AddToArray = () => {
-        //     barCodes.push({ Product: this.state.productName, Code: this.state.productCode })
-        this.storeData();
     }
 
     storeData = async () => {
@@ -89,9 +83,6 @@ class AddToList extends React.Component {
                         // get at each store's key/value so you can work with it
                         let key = store[i][0];
                         let value = store[i][1];
-
-                        console.log(key)
-                        console.log(value)
 
                         barCodes.push({Product: key, Code: value})
                         this.forceUpdate();

@@ -20,7 +20,7 @@ class Home extends React.Component {
                 alignItems: 'center',
                 justifyContent: 'center'
             }}>
-                {barCodes.map((type) => <Text>{type.Product} {type.Code}</Text>)}
+                {barCodes.map((type) => <Text key={type.Product}>{type.Product} {type.Code}</Text>)}
 
                 <View style={{
                     flex: 2,
