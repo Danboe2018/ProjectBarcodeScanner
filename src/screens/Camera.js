@@ -31,7 +31,7 @@ class Camera extends React.Component {
       case "active":
         this.camera.resumePreview();
         break;
-      case "background": 
+      case "background":
         this.camera.pausePreview();
         break;
       case "inactive":
