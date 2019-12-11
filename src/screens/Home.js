@@ -1,7 +1,6 @@
 import React from 'react';
-import { Button, View, Text, ImageBackground, StyleSheet } from 'react-native';
+import { Button, View, Text, ImageBackground, StyleSheet, TouchableOpacity } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
-import { TouchableOpacity } from 'react-native-gesture-handler';
 
 class Home extends React.Component {
   constructor(props) {
@@ -39,7 +38,7 @@ class Home extends React.Component {
             <TouchableOpacity
               style={styles.button}
               onPress={() =>
-                this.props.navigation.navigate('Camera', { cameraMode: 'Add' })
+                this.props.navigation.navigate('Camera', { cameraMode: 'Scan' })
               }
             >
               <Text>Go to Add to List screen</Text>
@@ -53,6 +52,7 @@ class Home extends React.Component {
             >
               <Text>Go to Add to List screen</Text>
             </TouchableOpacity>
+
             <TouchableOpacity
               style={styles.button}
               onPress={() =>
@@ -61,6 +61,7 @@ class Home extends React.Component {
             >
               <Text>Go to Add to List screen</Text>
             </TouchableOpacity>
+
             <TouchableOpacity
               style={styles.button}
               onPress={() =>
@@ -69,6 +70,7 @@ class Home extends React.Component {
             >
               <Text>Go to Add to List screen</Text>
             </TouchableOpacity>
+
             <TouchableOpacity
               style={styles.button}
               onPress={() =>
@@ -113,9 +115,13 @@ class Home extends React.Component {
 const styles = StyleSheet.create({
   button: {
     alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: '#FFFFFF',
-    elevation: 3,
+    justifyContent: 'center',shadowColor: 'rgba(0,0,0, .4)', // IOS
+    shadowOffset: { height: 1.5, width: 1.5 }, // IOS
+    shadowOpacity: 1, // IOS
+    shadowRadius: 1, //IOS
+    backgroundColor: '#fff',
+    elevation: 3, // Android
+    padding: 10,
     borderRadius: 20,
     width: 270,
     height: 50,
