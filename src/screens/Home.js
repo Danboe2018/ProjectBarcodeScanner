@@ -6,6 +6,13 @@ class Home extends React.Component {
   constructor(props) {
     super(props);
     barCodes = [];
+    products = [
+      "Enquire Shampoo", 
+      "Hemp Shampoo",
+      "Swedish Shampoo",
+      "Redken Brews",
+      "AntiPerspirant"
+    ];
     this.getAllKeys();
   }
 
@@ -41,7 +48,7 @@ class Home extends React.Component {
                 this.props.navigation.navigate('Camera', { cameraMode: 'Scan' })
               }
             >
-              <Text>Go to Add to List screen</Text>
+              <Text>{products[0]}</Text>
             </TouchableOpacity>
 
             <TouchableOpacity
@@ -50,34 +57,34 @@ class Home extends React.Component {
                 this.props.navigation.navigate('Camera', { cameraMode: 'Scan' })
               }
             >
-              <Text>Go to Add to List screen</Text>
+              <Text>{products[1]}</Text>
             </TouchableOpacity>
 
             <TouchableOpacity
               style={styles.button}
               onPress={() =>
-                this.props.navigation.navigate('Coupon', {})
+                this.props.navigation.navigate('Camera', { cameraMode: 'Scan' })
               }
             >
-              <Text>Go to Add to List screen</Text>
+              <Text>{products[2]}</Text>
             </TouchableOpacity>
 
             <TouchableOpacity
               style={styles.button}
               onPress={() =>
-                this.props.navigation.navigate('Coupon', {})
+                this.props.navigation.navigate('Camera', { cameraMode: 'Scan' })
               }
             >
-              <Text>Go to Add to List screen</Text>
+              <Text>{products[3]}</Text>
             </TouchableOpacity>
 
             <TouchableOpacity
               style={styles.button}
               onPress={() =>
-                this.props.navigation.navigate('Coupon', {})
+                this.props.navigation.navigate('Camera', { cameraMode: 'Scan' })
               }
             >
-              <Text>Go to Add to List screen</Text>
+              <Text>{products[4]}</Text>
             </TouchableOpacity>
           </View>
           <View
@@ -94,6 +101,7 @@ class Home extends React.Component {
   getAllKeys = async () => {
     barCodes.length = 0;
     try {
+      AsyncStorage.setItem()
       AsyncStorage.getAllKeys((err, keys) => {
         AsyncStorage.multiGet(keys, (err, stores) => {
           stores.map((result, i, store) => {
@@ -115,7 +123,7 @@ class Home extends React.Component {
 const styles = StyleSheet.create({
   button: {
     alignItems: 'center',
-    justifyContent: 'center',shadowColor: 'rgba(0,0,0, .4)', // IOS
+    justifyContent: 'center', shadowColor: 'rgba(0,0,0, .4)', // IOS
     shadowOffset: { height: 1.5, width: 1.5 }, // IOS
     shadowOpacity: 1, // IOS
     shadowRadius: 1, //IOS

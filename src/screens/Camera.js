@@ -96,7 +96,6 @@ class Camera extends React.Component {
             height: '100%'
           }} />
         </View>
-
       </View>
     );
   }
