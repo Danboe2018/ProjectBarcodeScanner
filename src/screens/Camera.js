@@ -1,6 +1,6 @@
 import React from 'react';
-import {Text, View, StyleSheet, Vibration, AppState} from 'react-native';
-import {RNCamera} from 'react-native-camera';
+import { Text, View, StyleSheet, Vibration, AppState } from 'react-native';
+import { RNCamera } from 'react-native-camera';
 import AsyncStorage from '@react-native-community/async-storage';
 
 class Camera extends React.Component {
@@ -22,7 +22,7 @@ class Camera extends React.Component {
   handleAppStateChange = (nextAppState) => {
     /* Reference to RNCamera instance */
     if (!this.camera) {
-        console.log("No Camera")
+      console.log("No Camera")
       return;
     }
 
@@ -45,7 +45,7 @@ class Camera extends React.Component {
 
   componentDidMount() {
     AppState.addEventListener("change", this.handleAppStateChange);
-    const {navigation} = this.props;
+    const { navigation } = this.props;
     this.setState({
       cameraMode: JSON.stringify(navigation.getParam('cameraMode', '11')),
     });
@@ -86,7 +86,7 @@ class Camera extends React.Component {
               color: 'white',
               textShadowColor: 'black',
               textShadowRadius: 5,
-              textShadowOffset: {width: 2, height: 2},
+              textShadowOffset: { width: 2, height: 2 },
               margin: 50,
             }}>
             {this.getTitleText()}
@@ -164,7 +164,7 @@ class Camera extends React.Component {
             let key = store[i][0];
             let value = store[i][1];
 
-            this.barCodes.push({Product: key, Code: parseInt(value)});
+            this.barCodes.push({ Product: key, Code: parseInt(value) });
             this.forceUpdate();
           });
         });

@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, TextInput, Button} from 'react-native';
+import { View, Text, TextInput, Button } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 
 class AddToList extends React.Component {
@@ -10,7 +10,7 @@ class AddToList extends React.Component {
   }
 
   componentDidMount() {
-    const {navigation} = this.props;
+    const { navigation } = this.props;
     this.setState({
       productCode: JSON.stringify(navigation.getParam('productCode', '11')),
     });
@@ -20,7 +20,7 @@ class AddToList extends React.Component {
     title: 'AddToList',
   };
   render() {
-    const {navigation} = this.props;
+    const { navigation } = this.props;
     return (
       <View
         style={{
@@ -28,7 +28,7 @@ class AddToList extends React.Component {
           alignItems: 'flex-start',
           justifyContent: 'center',
         }}>
-        <Text style={{fontSize: 24, marginBottom: 10}}>Add to List:</Text>
+        <Text style={{ fontSize: 24, marginBottom: 10 }}>Add to List:</Text>
 
         <Text>Product Name:</Text>
         <TextInput
@@ -39,7 +39,7 @@ class AddToList extends React.Component {
             borderWidth: 1,
             marginBottom: 20,
           }}
-          onChangeText={text => this.setState({productName: text})}
+          onChangeText={text => this.setState({ productName: text })}
         />
 
         <Text>Product Code:</Text>
@@ -54,7 +54,7 @@ class AddToList extends React.Component {
           defaultValue={JSON.stringify(
             navigation.getParam('productCode', '11'),
           )}
-          onChangeText={text => this.setState({productCode: text})}
+          onChangeText={text => this.setState({ productCode: text })}
         />
 
         <View
@@ -111,7 +111,7 @@ class AddToList extends React.Component {
             let key = store[i][0];
             let value = store[i][1];
 
-            barCodes.push({Product: key, Code: value});
+            barCodes.push({ Product: key, Code: value });
             this.forceUpdate();
           });
         });

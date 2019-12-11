@@ -1,6 +1,7 @@
 import React from 'react';
-import {Button, View, Text} from 'react-native';
+import { Button, View, Text, ImageBackground, StyleSheet } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 class Home extends React.Component {
   constructor(props) {
@@ -14,39 +15,77 @@ class Home extends React.Component {
   };
   render() {
     return (
-      <View
-        style={{
-          flex: 1,
-          alignItems: 'center',
-          justifyContent: 'center',
-        }}>
-        {barCodes.map(type => (
-          <Text key={type.Product}>
-            {type.Product} {type.Code}
-          </Text>
-        ))}
-
+      <ImageBackground
+        source={require('../../assets/images/background.png')}
+        style={{ flex: 1 }}>
         <View
           style={{
-            flex: 2,
-            alignItems: 'stretch',
+            flex: 1,
+            alignItems: 'center',
             justifyContent: 'center',
           }}>
-          <Button
-            title="Go to Add To List screen"
-            onPress={() =>
-              this.props.navigation.navigate('Camera', {cameraMode: 'Add'})
-            }
-          />
+          <View
+            style={{
+              flex: .7,
+              backgroundColor: '#FFFFFF'
+            }} />
 
-          <Button
-            title="Go to Scan from List screen"
-            onPress={() =>
-              this.props.navigation.navigate('Camera', {cameraMode: 'Scan'})
-            }
-          />
+          <View
+            style={{
+              flex: 1,
+              alignItems: 'center',
+              justifyContent: 'space-between',
+            }}>
+            <TouchableOpacity
+              style={styles.button}
+              onPress={() =>
+                this.props.navigation.navigate('Camera', { cameraMode: 'Add' })
+              }
+            >
+              <Text>Go to Add to List screen</Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity
+              style={styles.button}
+              onPress={() =>
+                this.props.navigation.navigate('Camera', { cameraMode: 'Scan' })
+              }
+            >
+              <Text>Go to Add to List screen</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.button}
+              onPress={() =>
+                this.props.navigation.navigate('Coupon', {})
+              }
+            >
+              <Text>Go to Add to List screen</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.button}
+              onPress={() =>
+                this.props.navigation.navigate('Coupon', {})
+              }
+            >
+              <Text>Go to Add to List screen</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.button}
+              onPress={() =>
+                this.props.navigation.navigate('Coupon', {})
+              }
+            >
+              <Text>Go to Add to List screen</Text>
+            </TouchableOpacity>
+          </View>
+          <View
+            style={{
+              flex: 1,
+              backgroundColor: '#FFFFFF'
+            }}>
+          </View>
         </View>
-      </View>
+      </ImageBackground>
     );
   }
 
@@ -60,7 +99,7 @@ class Home extends React.Component {
             let key = store[i][0];
             let value = store[i][1];
 
-            barCodes.push({Product: key, Code: value});
+            barCodes.push({ Product: key, Code: value });
             this.forceUpdate();
           });
         });
@@ -70,4 +109,18 @@ class Home extends React.Component {
     }
   };
 }
+
+const styles = StyleSheet.create({
+  button: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#FFFFFF',
+    elevation: 3,
+    borderRadius: 20,
+    width: 270,
+    height: 50,
+    marginBottom: 7,
+  }
+});
+
 export default Home;
