@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View, StyleSheet, Vibration, AppState } from 'react-native';
+import { Text, View, StyleSheet, Vibration, AppState, Image } from 'react-native';
 import { RNCamera } from 'react-native-camera';
 import AsyncStorage from '@react-native-community/async-storage';
 
@@ -75,33 +75,30 @@ class Camera extends React.Component {
             buttonNegative: 'Cancel',
           }}
           onBarCodeRead={this.onBarCodeRead.bind(this)}>
-          {this.barCodes.map(type => (
-            <Text key={type.Product}>
-              {type.Product} {type.Code}
-            </Text>
-          ))}
           <Text
             style={{
-              fontSize: 24,
-              color: 'white',
-              textShadowColor: 'black',
-              textShadowRadius: 5,
-              textShadowOffset: { width: 2, height: 2 },
-              margin: 50,
+              justifyContent: 'center',
+              fontSize: 16,
+              color: 'black',
+              backgroundColor: 'white',
+              paddingLeft: 20,
+              paddingRight: 20,
+              borderRadius: 20,
+              marginBottom: 450,
             }}>
-            {this.getTitleText()}
+            Match the barcode up with the lines below
           </Text>
         </RNCamera>
+        <View style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0 }}><Image
+          source={require('../../assets/images/camera.png')}
+          style={{
+            width: '100%',
+            height: '100%'
+          }} />
+        </View>
+
       </View>
     );
-  }
-
-  getTitleText() {
-    if (this.state.cameraMode.includes('Add')) {
-      return 'Scan Barcode To Add';
-    } else {
-      return 'Scan Barcode To Check';
-    }
   }
 
   onBarCodeRead(scanResult) {
