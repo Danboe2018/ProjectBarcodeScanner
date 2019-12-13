@@ -18,7 +18,7 @@ class Camera extends React.Component {
     console.log('Started');
     this.getAllKeys();
   }
-
+  
   handleAppStateChange = (nextAppState) => {
     /* Reference to RNCamera instance */
     if (!this.camera) {
@@ -32,13 +32,13 @@ class Camera extends React.Component {
         this.camera.resumePreview();
         break;
       case "background":
-        this.camera.pausePreview();
+        // this.camera.pausePreview();
         break;
       case "inactive":
       default:
     }
   };
-
+  
   componentWillUnmount() {
     AppState.removeEventListener("change", this.handleAppStateChange);
   }
@@ -75,40 +75,20 @@ class Camera extends React.Component {
             buttonNegative: 'Cancel',
           }}
           onBarCodeRead={this.onBarCodeRead.bind(this)}>
-          <Text
-            style={{
-              justifyContent: 'center',
-              fontSize: 16,
-              color: 'black',
-              backgroundColor: 'white',
-              paddingLeft: 20,
-              paddingRight: 20,
-              borderRadius: 20,
-              marginBottom: 450,
-            }}>
-            Match the barcode up with the lines below
-          </Text>
         </RNCamera>
-        <View style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0 }}><Image
-          source={require('../../assets/images/camera.png')}
-          style={{
-            width: '100%',
-            height: '100%'
-          }} />
+        <View style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0 }}>
+          <Image
+            source={require('../../assets/images/camera.png')}
+            style={{
+              width: '100%',
+              height: '100%'
+            }} />
         </View>
       </View>
     );
   }
 
   onBarCodeRead(scanResult) {
-    try {
-      if (this.camera) {
-        this.camera.pausePreview();
-      }
-    } catch (error) {
-      alert('' + error);
-    }
-
     let index = 0;
     Vibration.vibrate(250);
     if (this.state.cameraMode.includes('Add')) {
@@ -118,17 +98,17 @@ class Camera extends React.Component {
     } else {
       index = this.matchBarcode(scanResult.data);
       if (index == -1) {
-        alert('Item Not Found On List.');
+        this.props.navigation.navigate('Check');
         console.log('DATA: ' + scanResult.data);
       } else {
         console.log('Index: ' + index);
+        this.props.navigation.navigate('Check');
         AsyncStorage.removeItem(this.barCodes[index].Product);
         this.barCodes.splice(index, 1);
         alert('Item Removed From List.');
         this.getAllKeys();
       }
     }
-    // return;
   }
 
   debugBarcode() {

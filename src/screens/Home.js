@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, View, Text, ImageBackground, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, ImageBackground, StyleSheet, TouchableOpacity } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 
 class Home extends React.Component {
@@ -7,7 +7,7 @@ class Home extends React.Component {
     super(props);
     barCodes = [];
     products = [
-      "Enquire Shampoo", 
+      "Enquire Shampoo",
       "Hemp Shampoo",
       "Swedish Shampoo",
       "Redken Brews",

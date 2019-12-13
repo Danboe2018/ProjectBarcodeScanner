@@ -5,6 +5,8 @@ import Home from './src/screens/Home';
 import Camera from './src/screens/Camera';
 import AddToList from './src/screens/AddToList';
 import Coupon from './src/screens/Coupon';
+import Check from './src/screens/Check';
+
 const Project = createStackNavigator({
   Home: {
     screen: Home,
@@ -26,6 +28,12 @@ const Project = createStackNavigator({
   },
   Coupon: {
     screen: Coupon,
+    navigationOptions: {
+      header: null,
+    },
+  },
+  Check: {
+    screen: Check,
     navigationOptions: {
       header: null,
     },
